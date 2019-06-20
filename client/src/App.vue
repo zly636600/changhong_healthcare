@@ -1,97 +1,66 @@
 <template>
   <div id="app">
-    <div class="float-layer left-float-layer">
-       <fixed-attr-indicator class="fixed-attrs"/>
-       <dynamic-attr-indicator 
-          name=辖区居民
-          value=1303
-          top=130
-          id = xiaqu
-          class="dynamic-attrs"
-        />
-        <dynamic-attr-indicator
-          name=签约人数
-          value=974
-          top=230
-          id = qianyue
-          class="dynamic-attrs"
-        /> 
-        <syou-pie-chart
-          class="pie-chart"
-        />
-        <syou-group-pie-chart
-          class="group-pie-chart"
-        />
-        <syou-group-bar-chart
-          class="group-bar-chart"
-        />
-     
-     
+    <div style='z-index:999' class="float-layer left-float-layer">
+        <map-view/>
+        <time-line/>
+
     </div>
 
-    <syou-mapbox-view class="mapbox-view"/>
-
     <div class="float-layer right-float-layer">
-      <syou-vertical-bar-chart class="vertical-bar-chart"/>
-      <syou-tick-dash-chart class="tick-dash-chart"/>
-      <syou-bubble-chart class="bubble-chart" v-bind:data = "bubbleData" />
-      <syou-gauge-chart 
-        id='index-1'
-        right='-50'
-        container="gauge1" 
-        class="gauge-chart" 
-        value='100'
-        name='签约评估得分'
+      
+      <matrix
+          width=550
+          height=250
+        
       />
-      <syou-gauge-chart
-        id='index-2'
-        right='200'
-        container="gauge2" 
-        class="gauge-chart"
-        value='90'
-        name='达标评估得分'
-      />
+      <histogram/>
+      
+    
+    
     </div>  
 
   </div>
-
 
 </template>
 
 <script>
 
-import SyouMapboxView from './components/SyouMapboxView';
+//import SyouMapboxView from './components/SyouMapboxView';
 
 ////////////////////////////////////////////////////
-import SyouPieChart from './components/SyouPieChart';
-import SyouLineChart from './components/SyouLineChart';
-import SyouGaugeChart from './components/SyouGaugeChart';
-import SyouRatioChart from './components/SyouRatioChart';
-import SyouGroupBarChart from './components/SyouGroupBarChart';
-import FixedAttrIndicator from './components/FixedAttrIndicator';
-import DynamicAttrIndicator from './components/DynamicAttrIndicator';
-//import SyouBubbleFrequencyChart from './components/SyouBubbleFrequencyChart';
-import SyouGroupPieChart from './components/SyouGroupPieChart';
-import SyouVerticalBarChart from './components/SyouVerticalBarChart';
-import SyouTickDashChart from './components/SyouTickDashChart';
-import SyouBubbleChart from './components/SyouBubbleChart';
+// import SyouPieChart from './components/SyouPieChart';
+// import SyouLineChart from './components/SyouLineChart';
+// import SyouGaugeChart from './components/SyouGaugeChart';
+// import SyouRatioChart from './components/SyouRatioChart';
+// import SyouGroupBarChart from './components/SyouGroupBarChart';
+// import FixedAttrIndicator from './components/FixedAttrIndicator';
+// //import DynamicAttrIndicator from './components/DynamicAttrIndicator';
+// //import SyouBubbleFrequencyChart from './components/SyouBubbleFrequencyChart';
+// import SyouGroupPieChart from './components/SyouGroupPieChart';
+// import SyouVerticalBarChart from './components/SyouVerticalBarChart';
+// import SyouTickDashChart from './components/SyouTickDashChart';
 import DataProvider from './DataProvider';
+import Matrix from './components/Matrix';
+import MapView from './components/MapView';
+import Histogram from './components/Histogram';
+import TimeLine from './components/TimeLine';
 
 export default {
   name: 'App',
   components: {
-    SyouPieChart,
-    SyouLineChart,
-    SyouGaugeChart,
-    SyouMapboxView,
-    SyouRatioChart,
-    SyouGroupBarChart,
-    SyouGroupPieChart,
-    SyouVerticalBarChart,
-    FixedAttrIndicator,
-    DynamicAttrIndicator,
-    SyouTickDashChart,
-    SyouBubbleChart,
+    // SyouPieChart,
+    // SyouLineChart,
+    // SyouGaugeChart,
+    // SyouRatioChart,
+    // SyouGroupBarChart,
+    // SyouGroupPieChart,
+    // SyouVerticalBarChart,
+    // FixedAttrIndicator,
+    // SyouTickDashChart,
+    Matrix,
+    MapView,
+    Histogram,
+    TimeLine,
   },
   data () {
     return {
@@ -121,7 +90,7 @@ export default {
 
 .float-layer {
   position: absolute;
-  z-index:999;
+  z-index:998;
   width:25%;
   height:100%;
 
@@ -143,6 +112,7 @@ body {
     padding:0;
     width:100%;
     height:100%;
+    background:black
 }
 
 .chart-name{
@@ -165,7 +135,20 @@ body {
 
     float:left; 
     left:10px; 
-    margin: 5%;
+    margin: 0%;
 
 }
+
+#tooltip{
+		position:absolute;
+		width:120;
+		height:auto;
+		font-family:serif;
+		font-size:14px;
+		text-align:left;
+		border-style:solid;
+		border-width:1px;
+		background-color:white;
+		border-radius:5px;
+	}
 </style>

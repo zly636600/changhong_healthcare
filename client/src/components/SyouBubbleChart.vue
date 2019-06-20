@@ -11,6 +11,8 @@
 <script>
  
 const d3 = require('d3');
+const dsv = require('d3-dsv');
+
 
 import DataProvider from '../DataProvider';
 
@@ -41,7 +43,7 @@ const props = {
 export default {
 
   name: 'bubble-chart',
-  props,
+  props:props,
   mounted: function() {
 
     this.chart = null
@@ -66,6 +68,14 @@ export default {
     d3.select(d3.select('#' + this.id).node().parentNode)
     .style('top', this.top + 'px')
     .style('right', this.right + 'px')
+
+
+    DataProvider.getCallRcordsCsv().then( response => {
+
+      let data = dsv.csvParse(response.data);
+
+      this.data = data
+    })
     
   },
 
